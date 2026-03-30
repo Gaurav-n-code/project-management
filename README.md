@@ -71,7 +71,7 @@ project-management-app/
 
 ### 1. Clone the repository
 
-git clone https://github.com/gauravnaugain9827/project-management.git
+git clone https://github.com/Gaurav-n-code/project-management.git
 cd project-management-app
 
 ---
