@@ -1,159 +1,144 @@
-# Turborepo starter
+# Project Management App
 
-This Turborepo starter is maintained by the Turborepo core team.
+A full-stack project management application that allows users to create projects and manage tasks within them.
 
-## Using this example
+This project demonstrates clean architecture, full-stack integration, authentication, and scalable design.
 
-Run the following command:
+---
 
-```sh
-npx create-turbo@latest
-```
+## Tech Stack
 
-## What's inside?
+### Frontend
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
 
-This Turborepo includes the following packages/apps:
+### Backend
+- NestJS
+- TypeScript
 
-### Apps and Packages
+### Database & Auth
+- Supabase (PostgreSQL + Authentication)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Monorepo
+- Turborepo
+- PNPM
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+---
 
-### Utilities
+## Features
 
-This Turborepo has some additional tools already setup for you:
+### Authentication
+- User signup
+- User login
+- JWT-based authentication
+- Protected backend routes
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### Project Management
+- Create project
+- View all projects
+- Update project
+- Delete project
 
-### Build
+### Task Management
+- Create tasks inside projects
+- Update task status (todo, in-progress, done)
+- Delete tasks
 
-To build all apps and packages, run the following command:
+### UI
+- Clean and responsive design
+- Dashboard with project cards
+- Task page with status indicators
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+---
 
-```sh
-cd my-turborepo
-turbo build
-```
+## Project Structure
 
-Without global `turbo`, use your package manager:
+project-management-app/
+│
+├── apps/
+│   ├── frontend/   # Next.js application
+│   ├── backend/    # NestJS API
+│   └── docs/       # Documentation (optional)
+│
+├── packages/       # Shared configs
+├── turbo.json
+└── pnpm-workspace.yaml
 
-```sh
-cd my-turborepo
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
+---
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+## Setup Instructions
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+### 1. Clone the repository
 
-```sh
-turbo build --filter=docs
-```
+git clone https://github.com/gauravnaugain9827/project-management.git
+cd project-management-app
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+### 2. Install dependencies
 
-### Develop
+pnpm install
 
-To develop all apps and packages, run the following command:
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+### 3. Setup environment variables
 
-```sh
-cd my-turborepo
-turbo dev
-```
+### Backend (apps/backend/.env)
 
-Without global `turbo`, use your package manager:
+NOTE: It is totally optional as I had hardcoded it.
+SUPABASE_URL=your_supabase_url  
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key  
 
-```sh
-cd my-turborepo
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
+---
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### Frontend (apps/frontend/.env.local)
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+NOTE: It is totally optional as I had hardcoded it.
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url  
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key  
 
-```sh
-turbo dev --filter=web
-```
+---
 
-Without global `turbo`:
+### 4. Run the application
 
-```sh
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+pnpm dev
 
-### Remote Caching
+---
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### 5. Access the app
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+Frontend → http://localhost:3000  
+Backend → http://localhost:3002  
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+### 6. Login
+Email: test@gmail.com
+Password: Test123!@#
 
-```sh
-cd my-turborepo
-turbo login
-```
+## Architecture Overview
 
-Without global `turbo`, use your package manager:
+- Frontend communicates with backend via REST APIs
+- Backend handles business logic and authentication
+- Supabase provides:
+  - Database (PostgreSQL)
+  - Authentication (JWT)
 
-```sh
-cd my-turborepo
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
+---
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## Tradeoffs & Decisions
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+- Used Supabase to speed up development and focus on core logic
+- Chose monorepo for better scalability and code organization
+- Prioritized functionality over heavy UI libraries
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+---
 
-```sh
-turbo link
-```
+## Status
 
-Without global `turbo`:
-
-```sh
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+ Authentication implemented  
+ Full CRUD (Projects & Tasks)  
+ Clean UI  
+ Backend integration complete  
+ Ready for scaling and improvements  
